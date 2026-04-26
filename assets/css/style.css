@@ -1,0 +1,459 @@
+/* =========================================
+   Plus Jakarta Sans — Minimalist Portfolio
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Design Tokens */
+:root {
+    --bg:              #F9F9F9;
+    --surface:         #FFFFFF;
+    --text-primary:    #0D0D0D;
+    --text-secondary:  #474747;
+    --text-muted:      #9B9B9B;
+    --border:          #E8E8E8;
+    --max-w:           680px;
+    --nav-h:           60px;
+}
+
+/* Base */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================
+   Navigation
+   ========================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    background: rgba(249, 249, 249, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+}
+
+.navbar-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-brand {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-link {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+/* =========================================
+   Home — Hero
+   ========================================= */
+
+.hero {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 5.5rem 2rem 7rem;
+}
+
+.hero-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+}
+
+.hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-role {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.hero-name {
+    font-size: 2.625rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 2.25rem;
+}
+
+.hero-bio {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 560px;
+}
+
+.hero-bio + .hero-bio {
+    margin-top: 1.25rem;
+}
+
+.hero-bio strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* =========================================
+   Projects Page
+   ========================================= */
+
+.projects {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 5.5rem 2rem 7rem;
+}
+
+.page-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.page-title {
+    font-size: 2.625rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+.page-subtitle {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 4.5rem;
+}
+
+/* Project List */
+.project-list {
+    list-style: none;
+}
+
+.project-item {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.project-item:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.project-num {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 0.625rem;
+}
+
+.project-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.15s ease;
+}
+
+.project-link:hover {
+    border-bottom-color: var(--text-primary);
+}
+
+.project-description {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 1.125rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.tag {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+
+.footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.footer-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+}
+
+.footer-inner p {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+/* Tablet - Large Mobile (641px - 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --max-w: 600px;
+        --nav-h: 56px;
+    }
+
+    .hero-name,
+    .page-title {
+        font-size: 2.25rem;
+    }
+
+    .hero,
+    .projects {
+        padding: 4.5rem 1.75rem 6rem;
+    }
+
+    .navbar-inner {
+        padding: 0 1.75rem;
+        gap: 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .hero-avatar {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* Mobile (640px and below) */
+@media (max-width: 640px) {
+    :root {
+        --max-w: 100%;
+        --nav-h: 56px;
+    }
+
+    .hero-name,
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .hero,
+    .projects {
+        padding: 3.5rem 1rem 5rem;
+    }
+
+    .navbar-inner {
+        padding: 0 1rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: auto;
+        min-height: var(--nav-h);
+    }
+
+    .nav-brand {
+        flex-basis: 100%;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-links {
+        gap: 1.25rem;
+    }
+
+    .nav-link {
+        font-size: 0.8125rem;
+    }
+
+    .hero-avatar {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 2rem;
+    }
+
+    .hero-role {
+        font-size: 0.625rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-bio {
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .hero-bio + .hero-bio {
+        margin-top: 1rem;
+    }
+
+    .page-eyebrow {
+        font-size: 0.625rem;
+    }
+
+    .project-item {
+        padding: 1.75rem 0;
+    }
+
+    .project-title {
+        font-size: 1.125rem;
+    }
+
+    .project-description {
+        font-size: 0.875rem;
+        max-width: 100%;
+    }
+
+    .tag {
+        font-size: 0.625rem;
+        padding: 0.15rem 0.45rem;
+    }
+
+    .footer-inner {
+        padding: 1rem 1rem;
+    }
+
+    .footer-inner p {
+        font-size: 0.75rem;
+    }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+    :root {
+        --max-w: 100%;
+    }
+
+    .hero-name,
+    .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .hero,
+    .projects {
+        padding: 3rem 0.75rem 4rem;
+    }
+
+    .navbar-inner {
+        padding: 0 0.75rem;
+    }
+
+    .navbar {
+        position: relative;
+    }
+
+    .hero-avatar {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 1.75rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.75rem;
+    }
+
+    .project-item {
+        padding: 1.5rem 0;
+    }
+
+    .project-num {
+        font-size: 0.625rem;
+    }
+
+    .project-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
