@@ -148,6 +148,36 @@ body {
     font-weight: 600;
 }
 
+.cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 2rem;
+    padding: 0.55rem 1rem;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.cv-download:hover {
+    border-color: var(--text-primary);
+    background: var(--bg);
+}
+
+.cv-download svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.65;
+}
+
 /* =========================================
    Projects Page
    ========================================= */
