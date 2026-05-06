@@ -233,7 +233,6 @@
             tremolo2.start(audioCtx.currentTime);
             sweepLFO.start(audioCtx.currentTime);
 
-            console.log('Web Audio setup complete - MAXIMUM CREEPY MODE ACTIVATED');
         } catch (e) {
             console.error('Web Audio setup failed:', e.message);
         }
@@ -252,7 +251,6 @@
         }
 
         try {
-            console.log('Creating fallback ambient sound - CREEPY MODE...');
             const now = audioCtx.currentTime;
             const mainGain = audioCtx.createGain();
 
