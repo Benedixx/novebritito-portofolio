@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="assets/css/void.css">
+    <title>∅</title>
+</head>
+<body class="void-body">
+
+    <!-- Click-to-enter overlay (also satisfies browser autoplay policy) -->
+    <div id="void-gate">
+        <div class="gate-inner">
+            <p class="gate-eyebrow">you weren't supposed to find this</p>
+            <h1 class="gate-title">enter</h1>
+            <p class="gate-hint">click anywhere</p>
+        </div>
+    </div>
+
+    <!-- Atmospheric overlays (pointer-events:none, always on top) -->
+    <div class="void-scanlines" aria-hidden="true"></div>
+    <div class="void-noise" aria-hidden="true"></div>
+
+    <!-- Custom cursor (two-part: snap lead + lagging shadow) -->
+    <div id="cursor-lead" aria-hidden="true"></div>
+    <div id="cursor-shadow" aria-hidden="true"></div>
+
+    <!-- Eyes container (JS spawns 7 eye elements here) -->
+    <div id="eyes-container" aria-hidden="true"></div>
+
+    <main class="void-main" id="void-main">
+
+        <!-- Hero: glitch headline -->
+        <section class="void-section void-hero">
+            <p class="void-eyebrow">∅ — void</p>
+            <h1 id="glitch-headline" class="void-title glitch-text" data-text="what did you expect">what did you expect</h1>
+            <p id="glitch-subtitle" class="void-subtitle glitch-text" data-text="it was always here.">it was always here.</p>
+        </section>
+
+        <!-- "It knows you" (filled by JS) -->
+        <section class="void-section void-knows" id="void-knows">
+            <p class="knows-label">it already knows</p>
+            <p id="knows-time" class="knows-item"></p>
+            <p id="knows-browser" class="knows-item"></p>
+            <p id="knows-idle" class="knows-item knows-idle"></p>
+        </section>
+
+        <!-- Scroll-triggered messages -->
+        <section class="void-section void-messages">
+            <p class="scroll-msg" id="msg-1">why are you still scrolling</p>
+            <p class="scroll-msg" id="msg-2">there is nothing here for you</p>
+            <p class="scroll-msg" id="msg-3">every second you stay makes it stronger</p>
+            <p class="scroll-msg" id="msg-4">you felt it too, didn't you</p>
+            <p class="scroll-msg" id="msg-5">turn back. now.</p>
+            <p class="scroll-msg" id="msg-6">it's learning how you move</p>
+        </section>
+
+        <!-- Click counter reaction (JS writes here) -->
+        <section class="void-section void-click-msg" id="void-click-msg" aria-live="polite"></section>
+
+        <div class="void-spacer"></div>
+
+    </main>
+
+    <footer class="void-footer">
+        <a href="index.html" class="void-back">leave</a>
+    </footer>
+
+    <audio id="void-audio" src="assets/music/backsound.mp3" loop preload="metadata"></audio>
+    <script src="assets/js/void.js"></script>
+
+</body>
+</html>

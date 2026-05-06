@@ -1,0 +1,532 @@
+/* =========================================
+   VOID — Creepy Portfolio Page
+   ========================================= */
+
+/* Design tokens */
+:root {
+    --void-bg: #0a0303;
+    --void-surface: #0f0505;
+    --void-text: #b5b5b5;
+    --void-dim: #4a4a4a;
+    --void-accent: #d0d0d0;
+    --void-red: #8b1a1a;
+    --void-red-glow: rgba(139, 26, 26, 0.3);
+    --void-glow: rgba(180, 100, 100, 0.08);
+    --void-font: 'Plus Jakarta Sans', sans-serif;
+    --cursor-sz: 14px;
+    --cursor-shadow-sz: 32px;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base */
+.void-body {
+    font-family: var(--void-font);
+    background: var(--void-bg);
+    color: var(--void-text);
+    min-height: 100vh;
+    cursor: none;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* =========================================
+   Gate Overlay (Click-to-enter)
+   ========================================= */
+
+#void-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: none;
+    transition: opacity 0.8s ease;
+    animation: gate-flicker 0.15s steps(2) infinite;
+}
+
+#void-gate.dissolving {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.gate-inner {
+    text-align: center;
+    user-select: none;
+}
+
+.gate-eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #3a3a3a;
+    margin-bottom: 2rem;
+    animation: flicker 4s infinite;
+}
+
+.gate-title {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: #e8e8e8;
+    line-height: 1;
+    animation: pulse-dim 3s ease-in-out infinite;
+}
+
+.gate-hint {
+    font-size: 0.75rem;
+    color: #2a2a2a;
+    margin-top: 2.5rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: flicker 6s infinite 2s;
+}
+
+/* =========================================
+   Atmospheric Overlays
+   ========================================= */
+
+.void-scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 900;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.18) 3px,
+        rgba(0, 0, 0, 0.18) 4px
+    );
+}
+
+.void-noise {
+    position: fixed;
+    inset: 0;
+    z-index: 899;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: noise-drift 0.08s steps(1) infinite;
+}
+
+/* =========================================
+   Custom Cursor
+   ========================================= */
+
+#cursor-lead {
+    position: fixed;
+    width: var(--cursor-sz);
+    height: var(--cursor-sz);
+    background: var(--void-accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease;
+    mix-blend-mode: difference;
+}
+
+#cursor-shadow {
+    position: fixed;
+    width: var(--cursor-shadow-sz);
+    height: var(--cursor-shadow-sz);
+    border: 1px solid rgba(200, 200, 200, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: left 0.12s ease-out, top 0.12s ease-out, opacity 0.3s ease;
+    opacity: 0.5;
+}
+
+/* =========================================
+   Eyes
+   ========================================= */
+
+.eye-wrapper {
+    position: fixed;
+    width: 44px;
+    height: 28px;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    animation: eye-appear 1.5s ease forwards;
+}
+
+.eye-outer {
+    width: 100%;
+    height: 100%;
+    border: 1.5px solid rgba(200, 200, 200, 0.25);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background: rgba(8, 8, 8, 0.9);
+}
+
+.eye-inner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle at 35% 35%, #2a2a2a, #000);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease-out;
+    box-shadow: 0 0 8px rgba(139, 26, 26, 0.8), inset 0 0 2px rgba(139, 26, 26, 0.6);
+}
+
+/* =========================================
+   Glitch Text
+   ========================================= */
+
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    color: #ff0040;
+    clip-path: inset(0 0 60% 0);
+    animation: glitch-top 3.5s infinite steps(1);
+}
+
+.glitch-text::after {
+    color: #00ffcc;
+    clip-path: inset(60% 0 0 0);
+    animation: glitch-bottom 4s infinite steps(1) 0.5s;
+}
+
+#glitch-headline {
+    position: relative;
+    display: inline-block;
+}
+
+#glitch-headline::before,
+#glitch-headline::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#glitch-headline::before {
+    color: #ff0040;
+    clip-path: inset(0 0 60% 0);
+    animation: glitch-top 3.5s infinite steps(1);
+}
+
+#glitch-headline::after {
+    color: #00ffcc;
+    clip-path: inset(60% 0 0 0);
+    animation: glitch-bottom 4s infinite steps(1) 0.5s;
+}
+
+/* =========================================
+   Main Content
+   ========================================= */
+
+.void-main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    position: relative;
+    z-index: 100;
+}
+
+.void-section {
+    margin-bottom: 6rem;
+}
+
+.void-eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--void-dim);
+    margin-bottom: 0.75rem;
+}
+
+.void-title {
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--void-accent);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.void-subtitle {
+    font-size: 1rem;
+    color: var(--void-text);
+    line-height: 1.8;
+}
+
+.knows-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--void-dim);
+    margin-bottom: 1.5rem;
+}
+
+.knows-item {
+    font-size: 0.9375rem;
+    color: var(--void-text);
+    line-height: 1.8;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.knows-item.reveal {
+    opacity: 1;
+}
+
+.knows-idle {
+    margin-top: 0.5rem;
+}
+
+.scroll-msg {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1.4s ease, transform 1.4s ease;
+    font-size: 0.9375rem;
+    color: var(--void-dim);
+    line-height: 1.8;
+    padding: 3rem 0;
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+.scroll-msg.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.void-click-msg {
+    font-size: 1rem;
+    color: var(--void-accent);
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    padding: 2rem 0;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 8px rgba(139, 26, 26, 0.4);
+}
+
+.void-click-msg.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.void-spacer {
+    height: 60vh;
+}
+
+/* =========================================
+   Idle Dark Overlay
+   ========================================= */
+
+.void-body.idle-dark::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.4) 0%, rgba(20, 5, 5, 0.7) 100%);
+    z-index: 800;
+    pointer-events: none;
+    animation: idle-darken 2s ease forwards;
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+
+.void-footer {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    z-index: 100;
+}
+
+.void-back {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--void-dim);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.void-back:hover {
+    color: var(--void-accent);
+}
+
+/* =========================================
+   Animations
+   ========================================= */
+
+@keyframes flicker {
+    0%, 98%, 100% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 0.2;
+    }
+}
+
+@keyframes pulse-dim {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes noise-drift {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 200px 200px;
+    }
+}
+
+@keyframes glitch-top {
+    0%, 90%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    92% {
+        transform: translate(-3px, -2px);
+        opacity: 0.8;
+        clip-path: inset(0 0 55% 0);
+    }
+    94% {
+        transform: translate(3px, 1px);
+        opacity: 0.6;
+        clip-path: inset(5% 0 50% 0);
+    }
+    96% {
+        transform: translate(-2px, 0);
+        opacity: 0.9;
+        clip-path: inset(10% 0 60% 0);
+    }
+    98% {
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+@keyframes glitch-bottom {
+    0%, 88%, 100% {
+        transform: translate(0);
+        opacity: 0;
+    }
+    90% {
+        transform: translate(3px, 2px);
+        opacity: 0.7;
+        clip-path: inset(55% 0 0 0);
+    }
+    93% {
+        transform: translate(-4px, -1px);
+        opacity: 0.5;
+        clip-path: inset(62% 0 0 0);
+    }
+    96% {
+        transform: translate(2px, 0);
+        opacity: 0.8;
+        clip-path: inset(50% 0 0 0);
+    }
+    98% {
+        transform: translate(0);
+        opacity: 0;
+    }
+}
+
+@keyframes eye-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes idle-darken {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes gate-flicker {
+    0%, 50%, 100% {
+        background: #000;
+    }
+    25%, 75% {
+        background: #0a0303;
+    }
+}
+
+@keyframes screen-glitch {
+    0%, 100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-2px, 1px);
+        opacity: 0.98;
+    }
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 640px) {
+    .void-main {
+        padding: 4rem 1.5rem;
+    }
+
+    .void-title {
+        font-size: 1.875rem;
+    }
+
+    .void-subtitle {
+        font-size: 0.9375rem;
+    }
+
+    .gate-title {
+        font-size: clamp(2rem, 8vw, 4rem);
+    }
+}
